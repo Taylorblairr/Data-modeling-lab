@@ -1,0 +1,111 @@
+			Features
+- users can sign into the app with their email and password
+
+- users can create recipes with ingredients and instructions
+
+- recipes can be marked as public or private
+
+- users can view other people’s recipes
+
+- ingredients from recipes can be added to user’s grocery lists
+
+- users can create their own occasions and assign recipes to occasions
+
+
+			Brain storming
+
+- Email
+- Password
+- User ID
+- Post content
+- Manage content visibility
+- Create lists
+- Create occasions (names)
+
+Tables ideas
+- Users (User information for accounts)
+	- Email
+	- Password
+	- User ID
+- Recipes (This table will hold all information about the recipes that users submit)
+	- User ID
+	- Recipe ID
+	- Title
+	- Image
+	- Content
+	- Date
+	- Time
+	- Public
+	- Private
+	- Add to list
+- PostVisibility (This table will handle if posts are public or private)
+	- Public
+	- Private
+	- User ID
+	- Recipe ID
+-AddToGroceryList ( This table handles the adding and removing of recipes to lists)
+	- Add to list
+	- Remove from list
+	- List Name
+	- Recipe ID
+- FoodOccasion ( This table handles What occasion a user may want a recipe to be catagorized under)
+	- Occasion title
+	- Recipe ID
+	- Time
+	- Date
+
+				Relationships
+
+"one-to-many"
+
+Users ( This tabel connects to most of the schema for functionality)
+Recipe (This table connects to most of the schema for functionality)
+	
+
+
+CREATE TABLE "Users" (
+	"User ID" serial NOT NULL,
+	"Email" TEXT NOT NULL,
+	"Password" TEXT NOT NULL,
+);
+
+
+
+CREATE TABLE "Recipes" (
+	"Recipe ID" serial NOT NULL,
+	"User ID" serial NOT NULL,
+	"Title" TEXT NOT NULL,
+	"ImageURL" TEXT NOT NULL,
+	"Content" TEXT NOT NULL,
+	"TimeStamp" timestamp with time zone NOT NULL,
+	"User ID" serial NOT NULL,
+	"Public" int NOT NULL,
+	"Private" int NOT NULL,
+);
+
+
+CREATE TABLE "postVisibility" (
+	"Recipe ID" int NOT NULL,
+	"User ID" int NOT NULL,
+	"Public" int NOT NULL,
+	"Private" int NOT NULL,
+	"Vis ID" serial NOT NULL,
+);
+
+
+
+CREATE TABLE "groceryList" (
+	"Recipe ID" int NOT NULL,
+	"Add to list" int NOT NULL,
+	"Remove from list" int NOT NULL,
+	"List name" TEXT NOT NULL,
+	"List ID" serial NOT NULL,
+);
+
+
+
+CREATE TABLE "occasion" (
+	"Food Occasion ID" serial NOT NULL,
+	"Recipe ID" serial NOT NULL,
+	"Time Stamp" timestamp with time zone NOT NULL,
+);
